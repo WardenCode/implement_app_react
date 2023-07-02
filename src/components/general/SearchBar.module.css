@@ -1,0 +1,58 @@
+.container {
+  width: fit-content;
+  border-radius: 1rem;
+  padding: 0 .5rem;
+  background-color: #FFFFFF;
+}
+
+.container_dark {
+  background-color: #2C2C2C;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 5px;
+  color: #2C2C2C;
+  transition: color .2s ease;
+}
+
+.icon_dark {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.search_input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  height: 2.25rem;
+  width: 32rem;
+  color: #000000;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: color .2s ease;
+}
+
+.search_input::placeholder {
+  color: rgba(44, 44, 44, 0.60);
+  transition: color .2s ease;
+}
+
+.search_input_dark {
+  transition: color .2s ease;
+  color: #FFFFFF;
+}
+
+.search_input_dark::placeholder {
+  color: rgba(255, 255, 255, 0.60);
+  transition: color .2s ease;
+}
+
+.container:hover .icon,
+.container:hover .search_input::placeholder {
+  color: #000000;
+}
+
+.container:hover .icon_dark,
+.container:hover .search_input_dark::placeholder {
+  color: #FFFFFF;
+}

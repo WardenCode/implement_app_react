@@ -1,0 +1,48 @@
+.container_dark {
+  color: #FFFFFF;
+}
+
+.container {
+  display: inline-block;
+}
+
+.description_container {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.label {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #BB000E;
+}
+
+.input_dark {
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, .4);
+}
+
+.label_error {
+  color: #BB000E;
+}
+
+.icon_error {
+  color: #BB000E;
+}
+
+.input_error {
+  border: 1px solid #BB000E;
+}
+
+.error_message {
+  display: block;
+  color: #BB000E;
+}
