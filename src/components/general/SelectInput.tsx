@@ -26,7 +26,7 @@ function SelectInput({
   }
 
   return (
-    <div className={`${className} ${styles.container}`}>
+    <div className={`${styles.container} ${className}`}>
       <label className={styles.label}>{label}</label>
       <div className={styles.select_container}>
         <select

@@ -7,12 +7,7 @@
   cursor: pointer;
   border: none;
   width: fit-content;
-  border-radius: 2px;
   transition: all .2s ease;
-}
-
-.button:hover {
-  background-color: #cb121f;
 }
 
 .icon {

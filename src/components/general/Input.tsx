@@ -7,9 +7,9 @@ import styles from './Input.module.css';
 interface InputProps {
   label: string,
   type: string,
-  className: string,
   value: any,
   setValue: (value: any) => void,
+  className?: string,
   icon?: IconProp,
   inputAttributes?: InputHTMLAttributes<HTMLInputElement>,
   error?: boolean,
@@ -33,12 +33,13 @@ function Input({
   }
 
   return (
-    <div className={`${className} ${styles.container} ${dark && styles.container_dark}`}>
+    <div className={`${styles.container} ${dark && styles.container_dark} ${className}`}>
       <div className={styles.description_container}>
         {icon &&
           <FontAwesomeIcon
             icon={icon}
-            className={error ? styles.icon_error : styles.icon} />}
+            className={error ? styles.icon_error : styles.icon} />
+        }
         <label className={`${styles.label} ${error && styles.label_error}`}>{label}</label>
       </div>
       <input

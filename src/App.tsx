@@ -7,22 +7,22 @@ import SearchBar from "./components/general/SearchBar";
 import styles from "./App.module.css";
 import axios from "axios";
 import envionments from "./environments";
+import Authentication from "./routes/auth/Authentication";
 
 interface AuthResponse {
   userId: number
   username: string
 }
 
-
 function App() {
-  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
-  const [userUsername, setuserUsername] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userUsername, setUserUsername] = useState<string>("");
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
 
     const data = {
-      "username": "foo",
+      "username": userUsername,
       "password": "1234567"
     };
 
@@ -33,10 +33,10 @@ function App() {
     };
 
     axios.post<AuthResponse>(`${envionments.API_URL}/auth`, data, { headers })
-      .then((response) => {
-        console.log(response);
-        setuserUsername(response.data.username);
-        setisLoggedIn(true);
+      .then((response) => response.data)
+      .then((data) => {
+        setUserUsername(data.username);
+        setIsLoggedIn(true);
       })
       .catch((error) => {
         if (error.response) {
@@ -53,7 +53,14 @@ function App() {
 
   }, []);
 
-  return (isLoggedIn ? <p>Dashboard</p> : <p>Auth Page</p>);
+  return (
+    isLoggedIn
+      ? <p>Dashboard</p>
+      : <Authentication
+        setIsLoggedIn={setIsLoggedIn}
+        setUserUsername={setUserUsername}
+      />
+  );
 }
 
 export default App
