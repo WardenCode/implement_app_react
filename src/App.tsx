@@ -8,6 +8,7 @@ import styles from "./App.module.css";
 import axios from "axios";
 import envionments from "./environments";
 import Authentication from "./routes/auth/Authentication";
+import Dashboard from "./routes/dashboard/Dashboard";
 
 interface AuthResponse {
   userId: number
@@ -55,7 +56,10 @@ function App() {
 
   return (
     isLoggedIn
-      ? <p>Dashboard</p>
+      ? <Dashboard
+        setIsLoggedIn={setIsLoggedIn}
+        userUsername={userUsername}
+      />
       : <Authentication
         setIsLoggedIn={setIsLoggedIn}
         setUserUsername={setUserUsername}
