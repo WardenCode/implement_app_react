@@ -10,10 +10,10 @@ interface InputProps {
   value: any,
   setValue: (value: any) => void,
   className?: string,
-  icon?: IconProp,
   inputAttributes?: InputHTMLAttributes<HTMLInputElement>,
   error?: boolean,
   dark?: boolean
+  icon?: IconProp,
 }
 
 function Input({
@@ -40,7 +40,7 @@ function Input({
             icon={icon}
             className={error ? styles.icon_error : styles.icon} />
         }
-        <label className={`${styles.label} ${error && styles.label_error}`}>{label}</label>
+        <label className={error ? styles.label_error : ''}>{label}</label>
       </div>
       <input
         className={`${styles.input} ${dark && styles.input_dark} ${error && styles.input_error}`}

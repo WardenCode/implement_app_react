@@ -1,0 +1,15 @@
+.container {
+  width: fit-content;
+  border-radius: 0.9375rem;
+  padding: .25rem .75rem;
+  border: 1px solid #E31C25;
+  cursor: pointer;
+  transition: background-color .4s ease;
+  list-style: none;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.selected {
+  background-color: #E31C25;
+}

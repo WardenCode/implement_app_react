@@ -1,5 +1,5 @@
-const envionments = {
+const environments = {
   API_URL: 'http://localhost:8000/api'
 }
 
-export default envionments;
+export default environments;

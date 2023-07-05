@@ -4,7 +4,7 @@ import styles from './Authentication.module.css'
 import Login from './Login';
 import Register from "./Register";
 import axios from "axios";
-import envionments from "../../environments";
+import environments from "../../environments";
 
 interface AuthenticationProps {
   setIsLoggedIn: (value: boolean) => void;
@@ -26,7 +26,7 @@ function Authentication({
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const baseUrl = `${envionments.API_URL}/auth${_switch ? '/login' : '/register'}`;
+    const baseUrl = `${environments.API_URL}/auth${_switch ? '/login' : '/register'}`;
 
     const data = {
       username,

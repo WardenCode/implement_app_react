@@ -12,10 +12,8 @@
 }
 
 .icon {
-  color: rgba(0, 0, 0, 0.4);
+  color: #2C2C2C;
 }
-
-.label {}
 
 .input {
   width: 100%;
@@ -26,7 +24,7 @@
 
 .input_dark {
   color: #FFFFFF;
-  background: rgba(0, 0, 0, .4);
+  background: #2C2C2C;
 }
 
 .label_error {

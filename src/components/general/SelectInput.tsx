@@ -3,22 +3,27 @@ import styles from "./SelectInput.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+interface Option {
+  name: string;
+  value: any;
+}
+
 interface SelectInputProps {
   label: string,
-  options: string[],
-  multiple: boolean,
-  className: string,
+  options: Option[],
   value: any,
   setValue: (value: any) => void,
+  className?: string,
+  multiple?: boolean,
 }
 
 function SelectInput({
-  className,
   label,
-  multiple,
   options,
   setValue,
-  value
+  value,
+  className = "",
+  multiple = false,
 }: SelectInputProps) {
 
   function handleSelect(e: ChangeEvent<HTMLSelectElement>) {
@@ -37,10 +42,10 @@ function SelectInput({
         >
           {options.map(option => (
             <option
-              key={option}
-              value={option}
+              key={option.name}
+              value={option.value}
             >
-              {option}
+              {option.name}
             </option>
           ))}
         </select>
