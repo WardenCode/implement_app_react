@@ -19,6 +19,22 @@ interface FilterProps {
   setTitle: SetValue<string>
 }
 
+const defaultGenres = [
+  "action",
+  "drama",
+  "comedy",
+  "biography",
+  "romance",
+  "thriller",
+  "war",
+  "history",
+  "sport",
+  "sci-fi",
+  "documentary",
+  "crime",
+  "fantasy"
+];
+
 const sortOptions = [
   {
     name: 'Default',
@@ -87,7 +103,7 @@ function Filter({
       </div>
       <ul className={styles.tag_list}>
         {
-          genres.map(genre => (
+          defaultGenres.map((genre) => (
             <Tag
               key={genre}
               genre={genre}

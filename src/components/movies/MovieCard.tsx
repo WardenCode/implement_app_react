@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tag from './Tag';
 import { useState, useEffect } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestHeaders } from 'axios';
 import environments from '../../environments';
 import { faClock, faStar } from '@fortawesome/free-solid-svg-icons';
 import styles from './MovieCard.module.css'
+import unavailable_movie from '../../assets/images/unavailable_movie.png'
 
 interface Movie {
   createdAt: string
@@ -42,6 +43,24 @@ function handleAxiosError(error: AxiosError) {
   console.log(error.config);
 }
 
+function addToSection(url: string, headers: AxiosRequestHeaders) {
+  axios.post(url, { headers })
+    .then((response) => response.data)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(handleAxiosError);
+}
+
+function removeFromSection(url: string, headers: AxiosRequestHeaders) {
+  axios.delete(url, { headers })
+    .then((response) => response.data)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(handleAxiosError);
+}
+
 function MovieCard({
   movie
 }: MovieCardProps) {
@@ -57,43 +76,14 @@ function MovieCard({
       "Content-Type": "application/json",
     };
 
-    if (type === "favorite") {
-      if (isFavorite) {
-        axios.delete(url, { headers })
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(data)
-          })
-          .catch(handleAxiosError)
-      } else {
-        axios.post(url, { headers })
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(data)
-          })
-          .catch(handleAxiosError)
-      }
-      setIsFavorite(!isFavorite)
-    }
+    if (isFavorite || isWatchLater)
+      removeFromSection(url, headers)
+    else
+      addToSection(url, headers)
 
-    if (type === "watchlater") {
-      if (isFavorite) {
-        axios.delete(url, { headers })
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(data)
-          })
-          .catch(handleAxiosError)
-      } else {
-        axios.post(url, { headers })
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(data)
-          })
-          .catch(handleAxiosError)
-      }
-      setIsWatchLater(!isWatchLater)
-    }
+    if (type === "favorite") setIsFavorite(!isFavorite)
+
+    if (type === "watchlater") setIsWatchLater(!isWatchLater)
   }
 
   useEffect(() => {
@@ -120,25 +110,30 @@ function MovieCard({
       <figure className={styles.thumbnail}>
         <div className={styles.icons_container}>
           <FontAwesomeIcon
-            className={styles.icon}
+            className={`${styles.icon} ${isFavorite && styles.icon_activated}`}
             onClick={() => handleClick("favorite")}
             icon={faStar}
+            size='lg'
           />
           <FontAwesomeIcon
-            className={styles.icon}
+            className={`${styles.icon} ${isWatchLater && styles.icon_activated}`}
             onClick={() => handleClick("watchlater")}
             icon={faClock}
+            size='lg'
           />
         </div>
         <img
           className={styles.movie_img}
-          src={movie.imageurls[0]}
+          src={movie.imageurls[0] ?? unavailable_movie}
           alt={`${movie.title} Thumbnail`}
         />
         <h2 className={styles.title}>{movie.title}</h2>
       </figure>
       <div className={styles.movie_content}>
-        <p className={styles.summary}>{movie.summary}</p>
+        {/* <p className={styles.summary}>{movie.summary}</p> */}
+        <p className={styles.summary}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        </p>
         <ul className={styles.genres_container}>
           {
             movie.genres.map((genre) => (

@@ -27,7 +27,7 @@ function Tag({
 
   return (
     <li
-      className={`${styles.container} ${(selected || !filter) && styles.selected}`}
+      className={`${styles.container} ${filter && styles.clickable} ${(selected || !filter) && styles.selected}`}
       onClick={filter ? handleTag : () => { }}
     >
       {genre}

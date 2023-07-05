@@ -17,7 +17,7 @@
 }
 
 .tag_list {
-  width: 38rem;
+  width: 35rem;
   display: flex;
   flex-wrap: wrap;
   gap: .7rem .62rem;

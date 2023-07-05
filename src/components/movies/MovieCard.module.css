@@ -1,6 +1,7 @@
 .container {
   width: 18.75rem;
   height: 24.875rem;
+  list-style: none;
   background: #2C2C2C;
   box-shadow: 12px 10px 13px 0px rgba(255, 255, 255, 0.05);
 }
@@ -8,6 +9,7 @@
 .thumbnail {
   width: 18.75rem;
   height: 18.75rem;
+  margin: 0;
   position: relative;
 }
 
@@ -21,23 +23,30 @@
 }
 
 .icon {
+  color: #9c9c9c;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.icon_activated {
   color: #FFFFFF;
 }
 
 .movie_img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .title {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 2.5rem;
   padding: .3rem .5rem .7rem;
+  margin: 0;
   width: 100%;
-  color: #FFF;
+  color: #FFFFFF;
   font-size: 1.5rem;
+  font-weight: 400;
   line-height: 1.5rem;
   background: rgba(0, 0, 0, 0.50);
   text-transform: capitalize;
@@ -52,13 +61,19 @@
   display: flex;
   font-size: 0.8125rem;
   font-style: normal;
+  margin: 0;
+  margin-bottom: .8rem;
+  color: #FFFFFF;
   font-weight: 400;
   line-height: 0.8rem;
 }
 
 .genres_container {
+  padding: 0;
+  margin: 0;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: .6rem;
 }

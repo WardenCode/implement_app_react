@@ -2,13 +2,10 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate
 } from 'react-router-dom';
 import Header from '../../components/navigation/Header';
 import Sidebar from '../../components/navigation/Sidebar';
-
 import styles from './Dashboard.module.css';
-import Tag from '../../components/movies/Tag';
 import { useState } from 'react';
 import Filter from '../../components/movies/Filter';
 
@@ -17,35 +14,17 @@ interface DashboardProps {
   setIsLoggedIn: (value: boolean) => void
 }
 
-const defaultGenres = [
-  "action",
-  "drama",
-  "comedy",
-  "comedy",
-  "biography",
-  "romance",
-  "thriller",
-  "war",
-  "history",
-  "sport",
-  "sci-fi",
-  "documentary",
-  "crime",
-  "fantasy"
-];
-
 const actualYear = new Date().getFullYear();
 
 function Dashboard({
   userUsername,
   setIsLoggedIn
 }: DashboardProps) {
-  const [genres, setGenres] = useState<string[]>(defaultGenres);
+  const [genres, setGenres] = useState<string[]>([]);
   const [maxYear, setMaxYear] = useState<number>(actualYear);
   const [minYear, setMinYear] = useState<number>(actualYear);
   const [sort, setSort] = useState<string>('default');
   const [title, setTitle] = useState<string>('');
-
 
   return (
     <BrowserRouter>
