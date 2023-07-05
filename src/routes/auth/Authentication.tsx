@@ -3,17 +3,11 @@ import Button from '../../components/general/Button';
 import styles from './Authentication.module.css'
 import Login from './Login';
 import Register from "./Register";
-import axios from "axios";
-import environments from "../../environments";
+import { login, register } from "../../services/Auth.service";
 
 interface AuthenticationProps {
   setIsLoggedIn: (value: boolean) => void;
   setUserUsername: (value: string) => void;
-}
-
-interface AuthResponse {
-  message: string
-  accessToken: string
 }
 
 function Authentication({
@@ -26,33 +20,20 @@ function Authentication({
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const baseUrl = `${environments.API_URL}/auth${_switch ? '/login' : '/register'}`;
-
     const data = {
       username,
       password
     };
 
-    axios.post<AuthResponse>(baseUrl, data)
-      .then((response) => response.data)
+    const response = _switch ? login(data) : register(data);
+
+    response
       .then((data) => {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         setUserUsername(username);
         setIsLoggedIn(true);
       })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
   }
 
   function handleSwitch(state: boolean) {

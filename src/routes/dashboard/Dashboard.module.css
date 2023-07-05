@@ -10,12 +10,3 @@
   flex-grow: 1;
   height: 100%;
 }
-
-.main_content {
-  width: 100%;
-}
-
-.filter_section {
-  width: 100%;
-  padding: 3.5rem 3rem 0;
-}
