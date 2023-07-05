@@ -20,13 +20,13 @@ function SearchBar({
   }
 
   return (
-    <div className={`${styles.container} ${dark && styles.container_dark}`}>
+    <div className={`${styles.container} ${dark ? styles.container_dark : ""}`}>
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
-        className={`${styles.icon} ${dark && styles.icon_dark}`}
+        className={`${styles.icon} ${dark ? styles.icon_dark : ""}`}
       />
       <input
-        className={`${styles.search_input} ${dark && styles.search_input_dark}`}
+        className={`${styles.search_input} ${dark ? styles.search_input_dark : ""}`}
         placeholder="Search Movies"
         type="text"
         value={title}

@@ -20,19 +20,20 @@ interface FilterProps {
 }
 
 const defaultGenres = [
-  "action",
-  "drama",
-  "comedy",
-  "biography",
-  "romance",
-  "thriller",
-  "war",
-  "history",
-  "sport",
-  "sci-fi",
-  "documentary",
-  "crime",
-  "fantasy"
+  "Action",
+  "Drama",
+  "Comedy",
+  "Biography",
+  "Romance",
+  "Thriller",
+  "War",
+  "History",
+  "Sport",
+  "Sci-Fi",
+  "Documentary",
+  "Crime",
+  "Fantasy",
+  "Adventure"
 ];
 
 const sortOptions = [

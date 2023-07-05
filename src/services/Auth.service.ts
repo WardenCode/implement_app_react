@@ -3,7 +3,7 @@ import { AuthRequestDataI, AuthResponseDataI, LoginRequestDataI, LoginResponseDa
 import { axiosInstance } from '../utils';
 
 export function getAccessToken() {
-  return (localStorage.getItem("accesToken") || "");
+  return (localStorage.getItem("accessToken") || "");
 }
 
 export function authUser(data: AuthRequestDataI) {

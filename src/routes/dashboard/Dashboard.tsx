@@ -7,6 +7,8 @@ import Header from '../../components/navigation/Header';
 import Sidebar from '../../components/navigation/Sidebar';
 import styles from './Dashboard.module.css';
 import HomePage from './HomePage';
+import Favorites from './Favorites';
+import WatchLater from './WatchLater';
 
 interface DashboardProps {
   userUsername: string
@@ -26,15 +28,14 @@ function Dashboard({
         />
         <main className={styles.main_section}>
           <Sidebar />
-          <HomePage />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='/watchlater' element={<WatchLater />} />
+            <Route path='*' />
+          </Routes>
         </main>
       </div>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/favorites' />
-        <Route path='/watchlater' />
-        <Route path='*' />
-      </Routes>
     </BrowserRouter>
   )
 }

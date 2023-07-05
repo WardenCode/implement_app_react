@@ -41,7 +41,7 @@ function Sidebar({ }: SidebarProps) {
       <ul className={styles.navigation_list}>
         <li>
           <NavLink
-            to='/home'
+            to='/'
             className={checkNavLinkStatus}
           >
             <div className={styles.nav_link_content}>
@@ -88,7 +88,19 @@ function Sidebar({ }: SidebarProps) {
       <div className={styles.activities_container}>
         <p className={styles.activities_title}>Latest Activities</p>
         <ul className={styles.activities_list}>
-          {activitiesArray.slice(0, 10).map((activity) => <Activity />)}
+          {
+            activitiesArray
+              .slice(0, 10)
+              .map((activity) => (
+                <Activity
+                  key={activity.id}
+                  title={activity.title.title}
+                  activityType={activity.activityType}
+                  username={activity.user.username}
+                  updatedAt={activity.updatedAt}
+                />
+              ))
+          }
         </ul>
       </div>
     </nav>

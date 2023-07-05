@@ -47,12 +47,12 @@ function Authentication({
   return (
     <div className={styles.container}>
       <Button
-        className={`${styles.switch_button} ${_switch && styles.selected}`}
+        className={`${styles.switch_button} ${_switch ? styles.selected : ""}`}
         onClick={() => handleSwitch(true)}
         text="Sign In"
       />
       <Button
-        className={`${styles.switch_button} ${!_switch && styles.selected}`}
+        className={`${styles.switch_button} ${!_switch ? styles.selected : ""}`}
         onClick={() => handleSwitch(false)}
         text="Sign Up"
       />

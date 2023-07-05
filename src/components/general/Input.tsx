@@ -19,10 +19,10 @@ interface InputProps {
 function Input({
   label,
   type,
-  className,
   value,
   setValue,
   icon,
+  className = "",
   error = false,
   dark = false,
   inputAttributes,
@@ -33,17 +33,17 @@ function Input({
   }
 
   return (
-    <div className={`${styles.container} ${dark && styles.container_dark} ${className}`}>
+    <div className={`${styles.container} ${dark ? styles.container_dark : ""} ${className}`}>
       <div className={styles.description_container}>
         {icon &&
           <FontAwesomeIcon
             icon={icon}
             className={error ? styles.icon_error : styles.icon} />
         }
-        <label className={error ? styles.label_error : ''}>{label}</label>
+        <label className={error ? styles.label_error : ""}>{label}</label>
       </div>
       <input
-        className={`${styles.input} ${dark && styles.input_dark} ${error && styles.input_error}`}
+        className={`${styles.input} ${dark ? styles.input_dark : ""} ${error ? styles.input_error : ""}`}
         type={type}
         value={value}
         onChange={handleInput}

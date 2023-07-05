@@ -1,12 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tag from './Tag';
-import { useState, useEffect } from 'react';
-import environments from '../../environments';
+import { useState, useEffect, SyntheticEvent } from 'react';
 import { faClock, faStar } from '@fortawesome/free-solid-svg-icons';
 import styles from './MovieCard.module.css'
 import unavailable_movie from '../../assets/images/unavailable_movie.png'
 import { MovieI } from '../../interfaces/Api';
-import { addToSection, getFavoriteMovies, getWatchLaterMovies, removeFromSection } from '../../services/Api.service';
+import {
+  addToFavoriteMovies,
+  addToFromWatchLaterMovies,
+  getFavoriteMovies,
+  getWatchLaterMovies,
+  removeFromFavoritesMovies,
+  removeFromWatchLaterMovies
+} from '../../services/Api.service';
 
 interface MovieCardProps {
   movie: MovieI;
@@ -18,42 +24,59 @@ function MovieCard({
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isWatchLater, setIsWatchLater] = useState<boolean>(false);
 
+  function handleImageError(event: SyntheticEvent<HTMLImageElement, Event>) {
+    const target = event.target as HTMLImageElement;
+    target.src = unavailable_movie;
+  }
+
   function handleClick(type: string) {
-    const url = `${environments.API_URL}/titles/${type}?imdbId=${movie.imdbId}`;
+    const { imdbId } = movie;
 
-    if (isFavorite || isWatchLater)
-      removeFromSection(url)
-    else
-      addToSection(url)
+    if (type === "favorite") {
+      if (isFavorite)
+        removeFromFavoritesMovies(imdbId)
+      else
+        addToFavoriteMovies(imdbId);
 
-    if (type === "favorite") setIsFavorite(!isFavorite)
-    if (type === "watchlater") setIsWatchLater(!isWatchLater)
+      setIsFavorite(!isFavorite)
+    }
+
+    if (type === "watchlater") {
+      if (isWatchLater)
+        removeFromWatchLaterMovies(imdbId)
+      else
+        addToFromWatchLaterMovies(imdbId);
+
+      setIsWatchLater(!isWatchLater)
+    }
   }
 
   useEffect(() => {
     getFavoriteMovies()
       .then((data) => {
-        console.log(data)
+        if (data.some(favorite => favorite.id === movie.id))
+          setIsFavorite(true);
       })
 
     getWatchLaterMovies()
       .then((data) => {
-        console.log(data)
+        if (data.some(watchLater => watchLater.id === movie.id))
+          setIsWatchLater(true);
       })
-  }, [isFavorite, isWatchLater]);
+  }, []);
 
   return (
     <li className={styles.container}>
       <figure className={styles.thumbnail}>
         <div className={styles.icons_container}>
           <FontAwesomeIcon
-            className={`${styles.icon} ${isFavorite && styles.icon_activated}`}
+            className={`${styles.icon} ${isFavorite ? styles.icon_activated : ""}`}
             onClick={() => handleClick("favorite")}
             icon={faStar}
             size='lg'
           />
           <FontAwesomeIcon
-            className={`${styles.icon} ${isWatchLater && styles.icon_activated}`}
+            className={`${styles.icon} ${isWatchLater ? styles.icon_activated : ""}`}
             onClick={() => handleClick("watchlater")}
             icon={faClock}
             size='lg'
@@ -61,16 +84,14 @@ function MovieCard({
         </div>
         <img
           className={styles.movie_img}
-          src={movie.imageurls[0] ?? unavailable_movie}
+          src={movie.imageurls[0] || unavailable_movie}
           alt={`${movie.title} Thumbnail`}
+          onError={handleImageError}
         />
         <h2 className={styles.title}>{movie.title}</h2>
       </figure>
       <div className={styles.movie_content}>
-        {/* <p className={styles.summary}>{movie.summary}</p> */}
-        <p className={styles.summary}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p>
+        <p className={styles.summary}>{movie.synopsis}</p>
         <ul className={styles.genres_container}>
           {
             movie.genres.map((genre) => (

@@ -9,7 +9,6 @@ export interface MovieI {
   released: number
   reviews: string[]
   runtime: number
-  summary: string
   synopsis: string
   title: string
   trailerUrl: string[]
@@ -24,6 +23,11 @@ export interface MovieRequestParamsI {
   title: string
   page: number
   sort: string
+}
+
+export interface MovieResponseDataI {
+  totalCount: number,
+  titles: MovieI[]
 }
 
 export interface ActivityI {
